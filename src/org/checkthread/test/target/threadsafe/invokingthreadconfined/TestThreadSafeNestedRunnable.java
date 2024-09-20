@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,40 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.test.target.threadsafe.invokingthreadconfined;
+
+import org.checkthread.annotations.*;
+
+@ThreadSafe
+public class TestThreadSafeNestedRunnable {	
+	
+	public void bar() {
+		
+		// Anonymous class
+        Thread mythread = new Thread(){
+        	public void run() {
+        		
+        		// Anonymous class
+                Thread mythread = new Thread(){
+                	public void run() {
+                		
+                		// Anonymous class
+                        Thread mythread = new Thread(){
+                        	public void run() {
+                        		foo(); // ERROR: calling thread2 policy from thread1 policy
+                        	}
+                        };
+                        mythread.start();
+                	}
+                };
+                mythread.start();        		
+        	}
+        };
+        mythread.start();
+	}
+	
+	@ThreadConfined("thread2")
+	public void foo() {}
+}

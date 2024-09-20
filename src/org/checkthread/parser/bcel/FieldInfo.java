@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,40 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.parser.bcel;
+
+import org.apache.bcel.generic.*;
+
+/**
+ * Value object holding field information
+ */
+class FieldInfo {
+   
+   private String fFieldName;
+   private Type fFieldType;
+   private String fContainerClass;
+   
+   private static final long serialVersionUID = 1;
+   
+   public FieldInfo(String fieldName, 
+		                     Type fieldType,
+		                     String containerClass) {
+	   fFieldName = fieldName;
+	   fFieldType = fieldType;
+	   fContainerClass = containerClass;
+   }
+
+   public String getFieldName() {
+	   return fFieldName;
+   }
+   
+   public Type getFieldType() {
+	   return fFieldType;
+   }
+   
+   public String getContainerClass() {
+	   return fContainerClass;
+   }
+}

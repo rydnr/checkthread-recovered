@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,40 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.test.unittests;
+
+import java.util.*;
+import junit.framework.TestCase;
+
+import org.checkthread.config.*;
+import org.checkthread.main.ICheckThreadError;
+
+public class TestCaseNoPackageClass extends TestCase {
+    
+    protected void setUp() {}
+
+	protected void tearDown() {}
+
+	public void testNoAnnotation() {
+
+		Class clazz = null;
+		try {
+			clazz = Class.forName("NoPackageClass");
+		} catch (Exception e) {
+			Log.reportException(e);
+		}
+
+		if (clazz != null) {
+			TestParseHandler handler = TestUtil.parseClassHelper(clazz);
+			ArrayList<ICheckThreadError> list = handler.getThreadPolicyErrors();
+
+			// Verify that there is one thread policy error
+			int actualValue = list.size();
+			int expectedValue = 1;
+			assertEquals(expectedValue, actualValue);
+
+       }
+	}
+}

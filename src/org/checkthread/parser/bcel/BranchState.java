@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,41 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.parser.bcel;
+
+import org.apache.bcel.verifier.structurals.OperandStack;
+import org.checkthread.config.Log;
+
+/**
+ * Class representing a snapshot of a branching point
+ * within Java bytecode.
+ */
+final public class BranchState {
+  
+	private OperandStack fStack;
+    private LockStack fLockInfo;
+    private int fIndex;
+    
+    public BranchState(OperandStack stack,
+    		           LockStack lockInfo,
+    		           int index) {
+    	Log.logByteInfo("***CREATING NEW BRANCH at " + index);
+    	fStack = stack;
+    	fLockInfo = lockInfo;
+    	fIndex = index;
+    }
+    
+    public OperandStack getStack() {
+    	return fStack;
+    }
+    
+    public int getIndex() {
+    	return fIndex;
+    }
+    
+    public LockStack getLockInfo() {
+    	return fLockInfo;
+    }
+}

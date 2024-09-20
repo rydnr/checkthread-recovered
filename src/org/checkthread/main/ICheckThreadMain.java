@@ -1,4 +1,5 @@
-Copyright (c) 2008 Joe Conti
+/*
+Copyright (c) 2008 Joe Conti CheckThread.org
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -20,4 +21,37 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.main;
+
+import java.util.ArrayList;
+
+public interface ICheckThreadMain {
+
+	/**
+	 * Perform static analysis
+	 * @throws CheckThreadException
+	 */
+	public void run() throws CheckThreadException;
+	
+	/**
+	 * Get errors from static analysis
+	 * @return
+	 */
+	ArrayList<ICheckThreadError> getErrors();
+	
+	/**
+	 * Returns false if none of the inspected
+	 * byte code contained CheckThread annotations
+	 * @return
+	 */
+	public boolean foundCheckThreadAnnotations();
+	
+	/**
+	 * Returns true if there is at least one
+	 * class file to analyze
+	 * @return
+	 */
+	public boolean foundClassFileToAnalyze();
+}

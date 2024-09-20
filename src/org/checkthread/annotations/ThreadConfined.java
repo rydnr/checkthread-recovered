@@ -1,5 +1,4 @@
-Copyright (c) 2008 Joe Conti
-
+/*
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
 files (the "Software"), to deal in the Software without
@@ -20,4 +19,27 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.annotations;
+
+import java.lang.annotation.*;
+
+/**
+ * Use this class on methods that are confined to
+ * a specific run time thread. For example, the SWING
+ * API must be invoked on the Event-Dispatch thread.
+ * 
+ * Marking an API "ThreadConfined" should be a last
+ * resort and used sparingly since it represents the
+ * most restricted use.
+ *
+ */
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.METHOD,
+	     ElementType.CONSTRUCTOR,
+	     ElementType.TYPE})
+public @interface ThreadConfined {
+	String value();
+	boolean suppressErrors() default false;
+}

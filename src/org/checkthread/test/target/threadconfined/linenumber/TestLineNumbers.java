@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,43 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.test.target.threadconfined.linenumber;
+
+import org.checkthread.annotations.*;
+
+@ThreadConfined(ThreadName.MAIN)
+public class TestLineNumbers {
+	
+    public static void m1() { boo(); } // line 33
+    
+    public static void m2() { 
+    	boo(); // line 36 
+    } 
+    
+    public static void m3() {
+    	
+    	boo(); // line 41
+    	
+    }
+
+    public static void m4() {
+    	System.out.println("");
+    	boo(); // line 47    	
+    }
+
+    public static void m5() {
+    	System.out.println("");
+    	boo(); // line 52    	
+    	System.out.println("");
+    }
+
+    // line 58
+    public static void m6() {
+    	System.out.println(""); boo();System.out.println("");
+    }
+    
+    @ThreadConfined("foo")
+    public static void boo() {}
+}

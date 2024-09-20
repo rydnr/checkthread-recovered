@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,22 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.policy;
+
+import org.checkthread.parser.*;
+import org.checkthread.main.*;
+
+public interface IThreadPolicy {
+		
+	public ICheckThreadError getError(IThreadPolicy invokedPolicy,
+    		                          IInvokeMethodInfo dataBean);   
+	
+	public String getThreadConfinedName();
+	
+	public boolean isEquivalent(IThreadPolicy policy);
+	public boolean isSuppressErrors();
+	public boolean isImplicit();
+}
+

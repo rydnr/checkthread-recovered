@@ -1,4 +1,5 @@
-Copyright (c) 2008 Joe Conti
+/*
+Copyright (c) 2008 Joe Conti, CheckThread.org
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -20,4 +21,25 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+ */
+
+package org.checkthread.config;
+
+/**
+ * Container for holding ConfigBean
+ */
+public class ConfigSingletonFactory {
+    private static ConfigBean sBean = null;
+    
+    public static ConfigBean newConfigBean() {
+    	sBean = ConfigBean.newInstance();
+    	return sBean;
+    }
+    
+    public static ConfigBean getConfigBean() {
+    	if(sBean==null) {
+    		sBean = ConfigBean.newInstance();
+    	}
+    	return sBean;
+    }
+}

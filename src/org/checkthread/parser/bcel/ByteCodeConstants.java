@@ -1,4 +1,5 @@
-Copyright (c) 2008 Joe Conti
+/*
+Copyright (c) 2008 Joe Conti CheckThread.org
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -20,4 +21,13 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+package org.checkthread.parser.bcel;
+
+/**
+ * Hold constants related to class byte code
+ */
+public class ByteCodeConstants {
+    public final static String STATICBLOCK_IDENTIFIER = "<clinit>";
+    public final static String CONSTRUCTOR_INDENTIFIER = "<init>";
+}

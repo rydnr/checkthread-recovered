@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,31 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.parser;
+
+/**
+ * Interface for a value object holding
+ * information about a put or get field operation.
+ */
+public interface IPutGetFieldInfo {
+	public enum FieldAccessEnum {
+		PUT, GET, UNDEFINED
+	}
+	
+	public boolean isSynchronized();
+    public boolean isStaticBlock();   
+    public boolean isStaticField();
+    public IMethodInfo getParentMethodInfo();        
+    public String getFullFieldName();
+    public FieldAccessEnum getFieldAccess();
+    
+    // for reporting
+    public int getLineNumber();
+    public String getPathToClassFile();    
+    public String getSourceFile();
+    
+    // for debugging
+    public String getDump();
+}

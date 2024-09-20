@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,30 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.deadlockdetection;
+
+import java.util.ArrayList;
+
+final public class CrossNodeTable {
+	private ArrayList<Cross> table = new ArrayList<Cross>();
+	
+	public void addCross(INode start, INode stop) {
+		Cross cross = new Cross();
+		cross.fStart = start;
+		cross.fStop = stop;
+		table.add(cross);
+	}
+	
+	public ArrayList<Cross> getTable() {return table;}
+	
+	public void dump() {
+		System.out.println("");
+		System.out.println("***Cross Node Table***");
+		for(Cross cross : table) {
+			System.out.println(" Stop: " + cross.fStop.getShortName());
+		}
+		System.out.println("");
+	}
+}

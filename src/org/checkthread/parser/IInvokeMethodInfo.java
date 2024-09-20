@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,38 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.parser;
+
+import org.checkthread.policy.*;
+import java.lang.reflect.*;
+
+/**
+ * Interface for a value object holding
+ * information about a method invocation.
+ *
+ */
+public interface IInvokeMethodInfo {
+	
+    public boolean isSynchronized();   
+    public boolean isStaticBlock();       
+    public IMethodInfo getParentMethodInfo();    
+    
+    // invoked info
+    public String getInvokedMethodName();
+    public String getInvokedFullMethodName();
+    public IThreadPolicy getInvokedThreadPolicy();   
+    public String getInvokedFieldName();   
+    public boolean isInvokedMethodOnNonStaticField();
+    public boolean isInvokedMethodOnStaticField();
+    public boolean isInvokedMethodStatic();
+    public boolean isInvokedMethodOnThis();
+    public AccessibleObject getMethod();
+    public void setInvokedThreadPolicy(IThreadPolicy policy);
+    
+    // for reporting
+    public int getLineNumber();
+    public String getPathToClassFile();    
+    public String getSourceFile();
+}

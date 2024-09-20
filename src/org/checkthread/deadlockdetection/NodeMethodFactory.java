@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,41 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.deadlockdetection;
+
+import java.util.HashMap;
+
+import org.checkthread.parser.*;
+
+final public class NodeMethodFactory {
+
+	private static java.util.HashMap<String, NodeMethod> fCache = new HashMap<String, NodeMethod>();
+	
+	public static void clearCache() {
+		fCache.clear();
+	}
+	
+	public static NodeMethod getNodeMethod(String fullMethodName, 
+			String shortName,
+			IMethodInfo methodInfo) {
+		
+		// get from cache
+		NodeMethod node = fCache.get(fullMethodName);
+		if(node==null) {
+		   node = new NodeMethod(fullMethodName, 
+				   shortName, 
+				   methodInfo);
+		   fCache.put(fullMethodName, node);
+		}
+		
+		// add method info if we haven't already
+		if(node.getMethodInfo()==null) {
+			node.setMethodInfo(methodInfo);
+		}
+		
+		return node;
+	}
+
+}

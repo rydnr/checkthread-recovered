@@ -1,4 +1,5 @@
-Copyright (c) 2008 Joe Conti
+/*
+Copyright (c) 2008 Joe Conti CheckThread.org
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
@@ -20,4 +21,20 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.parser;
+
+import java.io.*;
+
+/**
+ * Implementations of this interface can handle
+ * static analysis events for class files.
+ *
+ */
+public interface IClassFileParser {
+    public void parseClassFile(File classFile);
+    public void parseZipFile(String zipFile, String zipFileEntry);
+    public void addHandler(IClassFileParseHandler handler);  
+    public void removeHandler(IClassFileParseHandler handler); 
+}

@@ -1,3 +1,4 @@
+/*
 Copyright (c) 2008 Joe Conti
 
 Permission is hereby granted, free of charge, to any person
@@ -20,4 +21,48 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
- 
+*/
+
+package org.checkthread.policyerrors;
+
+import org.checkthread.main.ICheckThreadError;
+import org.checkthread.parser.IMethodInfo;
+
+public class ErrorAnnotationOverride implements ICheckThreadError {
+    
+	private final IMethodInfo fMethodInfo;
+	
+	public ErrorAnnotationOverride(IMethodInfo methodInfo) 
+	{
+        fMethodInfo = methodInfo;
+    }
+
+	public String getErrorMessage() {
+			return "The method " + fMethodInfo.getMethodName() + " must have the" + 
+			"same CheckThread annotation as its superclass.";
+	}
+	
+	public void printErr() {
+		System.out.println(getErrorMessage());
+	}
+	
+	public String getParentName() {
+		return  fMethodInfo.getMethodName();
+	}
+	public String getInvokedName() {
+		return "not applicable";
+	}
+	
+	public int getLineNumber() {
+		return  fMethodInfo.getLineNumber();
+	}
+	
+	public String getSourceFile() {
+		return fMethodInfo.getSourceFile();
+	}
+	
+	public String getClassFilePath() {
+		return fMethodInfo.getPathToClassFile();
+	}
+	
+}
