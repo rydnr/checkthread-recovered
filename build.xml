@@ -1,19 +1,23 @@
 <project name="checkthread" default="build">
 
 <target name="init">
-	<property name="version" value="1.0.9"/>
+	<property name="version" value="1.0.10-SNAPSHOT"/>
 	<property name="rootDir" value="${basedir}"/>
-	<property name="srcDir" value="${rootDir}/src"/>
+	<property name="srcDirAnnotations" value="${rootDir}/checkthread-annotations/src/main/java"/>
+	<property name="srcDirAnalyzer" value="${rootDir}/checkthread-analyzer/src/main/java"/>
 	<property name="3rdparty" value="${rootDir}/lib"/>
-	<property name="classDir" value="${rootDir}/class_output"/>
+	<property name="classDirAnnotations" value="${rootDir}/checkthread-annotations/target/classes"/>
+	<property name="classDirAnalyzer" value="${rootDir}/checkthread-analyzer/target/classes"/>
 	<property name="examplesDir" value="${rootDir}/examples"/>
 	<property name="distDir" value="${rootDir}/dist"/>
-	<mkdir dir="${classDir}"/>
+	<mkdir dir="${classDirAnnotations}"/>
+	<mkdir dir="${classDirAnalyzer}"/>
 	<mkdir dir="${distDir}"/>
 </target>
 
 <target name="clean" depends="init">
-	<delete dir="${classDir}"/>
+	<delete dir="${classDirAnnotations}"/>
+	<delete dir="${classDirAnalyzer}"/>
 	<delete dir="${distDir}"/>
 </target>
 	
@@ -23,12 +27,20 @@
 
 <target name="build" depends="init">
 	
-	<javac srcdir="${srcDir}"
+	<javac srcdir="${srcDirAnnotations}"
 	       debug="true"
-	       destdir="${classDir}"
+	       destdir="${classDirAnnotations}"
+	       includes="**/*.java"
+         includeantruntime="false">
+	</javac>
+
+	<javac srcdir="${srcDirAnalyzer}"
+	       debug="true"
+	       destdir="${classDirAnalyzer}"
 	       includes="**/*.java"
          includeantruntime="false">
 	   <classpath>
+         <pathelement location="${classDirAnnotations}"/>
 	       <fileset dir="${3rdparty}/">
 	       	  <include name="**/ant.jar"/>
 	          <include name="**/bcel-5.2.jar"/>
@@ -38,38 +50,38 @@
 	</javac>
 
 	<!-- copy threadpolicy.xml -->
-	<copy todir="${classDir}">
-	    <fileset dir="${srcDir}">
+	<copy todir="${classDirAnalyzer}">
+	    <fileset dir="${srcDirAnalyzer}">
 	    	<include name="threadpolicy.xml"/>
 		</fileset>
 	</copy>
 		
 	<!-- annotation jar -->
     <jar destfile="${distDir}/checkthread-annotations-${version}.jar"
-	     basedir="${classDir}"
+	     basedir="${classDirAnnotations}"
          includes="org/checkthread/annotations/*.class"/>
          	
 	<!-- static analysis jar -->
     <jar destfile="${distDir}/checkthread-analyzer-${version}.jar"
-	     basedir="${classDir}"
+	     basedir="${classDirAnalyzer}"
     	 includes="org/checkthread/**/*.class,
     	           threadpolicy.xml"
          excludes="*.class,
                    examples/**/*.class,
     	           javathreads/**/*.class,
-    	           org/checkthread/test/**/*.class,
     	           org/checkthread/examples/**/*.class,
                    org/checkthread/annotations/*.class">
     </jar>    	 
 </target>
 	
 <target name="test" depends="build">
-	<java fork="true" classname="org.checkthread.test.unittests.ThreadcheckerTestSuite">
+	<java fork="true" classname="org.checkthread.ThreadcheckerTestSuite">
 	    <jvmarg value="-ea"/>
 		<arg value="-checkdir"/>
-	    <arg value="${classDir}"/>
+	    <arg value="${classDirAnalyzer}"/>
 		<classpath>
-	       <pathelement location="${classDir}"/>
+	       <pathelement location="${classDirAnnotations}"/>
+	       <pathelement location="${classDirAnalyzer}"/>
 	       <fileset dir="${3rdparty}/">
 	       	  <include name="**/*.jar"/>
 	       </fileset>
@@ -81,7 +93,7 @@
 	
     <!-- copy examples -->
 	<copy todir="${examplesDir}/src">
-	    <fileset dir="${srcDir}/examples/">
+	    <fileset dir="${srcDirAnalyzer}/org/checkthread/examples/">
 	    	<include name="**/*.java"/>
 		</fileset>
 	</copy>

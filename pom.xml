@@ -1,0 +1,16 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.checkthread</groupId>
+  <artifactId>checkthread-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0.10-SNAPSHOT</version>
+  <name>Checkthread</name>
+
+  <modules>
+    <module>checkthread-annotations</module>
+    <module>checkthread-analyzer</module>
+  </modules>
+</project>
