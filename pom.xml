@@ -13,4 +13,18 @@
     <module>checkthread-annotations</module>
     <module>checkthread-analyzer</module>
   </modules>
+
+ <distributionManagement>
+    <repository>
+      <id>acmsl-libs-releases</id>
+      <name>acmsl-libs-releases</name>
+      <url>http://maven.acm-sl.org:8081/repository/maven-ext-libs-releases-local</url>
+    </repository>
+    <snapshotRepository>
+      <id>acmsl-libs-snapshots</id>
+      <name>acmsl-libs-snapshots</name>
+      <url>http://maven.acm-sl.org:8081/repository/maven-ext-libs-snapshots-local</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 </project>
