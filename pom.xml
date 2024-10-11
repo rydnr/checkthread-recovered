@@ -16,13 +16,13 @@
 
  <distributionManagement>
     <repository>
-      <id>acmsl-libs-releases</id>
-      <name>acmsl-libs-releases</name>
+      <id>acmsl-ext-releases</id>
+      <name>acmsl-ext-releases</name>
       <url>http://maven.acm-sl.org:8081/repository/maven-ext-releases-local</url>
     </repository>
     <snapshotRepository>
-      <id>acmsl-libs-snapshots</id>
-      <name>acmsl-libs-snapshots</name>
+      <id>acmsl-ext-snapshots</id>
+      <name>acmsl-ext-snapshots</name>
       <url>http://maven.acm-sl.org:8081/repository/maven-ext-snapshots-local</url>
     </snapshotRepository>
   </distributionManagement>
